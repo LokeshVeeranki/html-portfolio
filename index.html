@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Material Symbols Rounded (Icons) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <!-- Google Font: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <button id="chatbot-toggler">
+    <span class="material-symbols-rounded">comment</span>
+    <span class="material-symbols-rounded">close</span>
+  </button>
+
+  <div class="chatbot-popup">
+    <!-- Chat-bot Header -->
+    <div class="chat-header">
+      <div class="header-info">
+        <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+          <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z" />
+        </svg>
+        <h2 class="logo-text">Chatbot</h2>
+      </div>
+      <button id="close-chatbox" class="material-symbols-rounded" aria-label="Minimize chatbot">keyboard_arrow_down</button>
+    </div>
+
+    <!-- Chat-bot Body -->
+    <div class="chat-body">
+      <div class="message bot-message">
+        <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+          <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z" />
+        </svg>
+        <div class="message-text">Hey there 👋 <br> How can I help you today?</div>
+      </div>
+    </div>
+
+    <!-- Chat-bot Footer -->
+    <div class="chat-footer">
+      <form action="#" class="chat-form">
+        <textarea name="message" id="message-input" class="message-input" placeholder="Type your message..." required></textarea>
+        <div class="chat-controls">
+          <button type="button" id="emoji-picker" class="material-symbols-rounded" aria-label="Emoji">sentiment_satisfied</button>
+          <div class="file-upload-wrapper">
+            <input type="file" accept="image/*" id="file-input" hidden>
+            <img src="#">
+            <button type="button" id="file-upload" class="material-symbols-rounded" aria-label="Attach file">attach_file</button>
+            <button type="button" id="file-cancel" class="material-symbols-rounded" aria-label="Attach file">close</button>
+          </div>
+          <button type="button" id="stop-generation" class="material-symbols-rounded" aria-label="Stop generation" style="display: none;">stop</button>
+          <button type="submit" id="send-message" class="material-symbols-rounded" aria-label="Send message">arrow_upward</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    class ChatBot {
+    constructor() {
+        this.chatBody = document.querySelector(".chat-body");
+        this.messageInput = document.querySelector(".message-input");
+        this.sendMessageButton = document.querySelector("#send-message");
+        this.fileInput = document.querySelector("#file-input");
+        this.fileUploadWrapper = document.querySelector(".file-upload-wrapper");
+        this.fileCancelButton = document.querySelector("#file-cancel");
+        this.chatbotToggler = document.querySelector("#chatbot-toggler");
+        this.closeChatbot = document.querySelector("#close-chatbox");
+        this.stopGenerationButton = document.querySelector("#stop-generation");
+        
+        // Store API URL without exposing the key
+        this.API_URL = this.getApiUrl();
+        
+        this.userData = {
+            message: null,
+            file: { data: null, mime_type: null }
+        };
+        
+        this.chatHistory = [];
+        this.initialInputHeight = this.messageInput.scrollHeight;
+        this.isTyping = false;
+        this.currentController = null;
+        
+        this.init();
+    }
+    
+    getApiUrl() {
+    // In production, get this from environment variables or secure config
+    const API_KEY = "AIzaSyAo5hjCkJV_f7tfufMQkj0Wcv-7XqkGOYk"; // Replace with your actual new key
+    return `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+  }
+    
+    init() {
+        this.attachEventListeners();
+        this.setupEmojiPicker();
+        this.loadChatHistory();
+    }
+    
+    attachEventListeners() {
+        this.messageInput.addEventListener("keydown", (e) => this.handleKeydown(e));
+        this.messageInput.addEventListener("input", () => this.adjustTextareaHeight());
+        this.fileInput.addEventListener("change", () => this.handleFileUpload());
+        this.fileCancelButton.addEventListener("click", () => this.cancelFileUpload());
+        this.sendMessageButton.addEventListener("click", (e) => this.handleOutgoingMessage(e));
+        this.stopGenerationButton.addEventListener("click", () => this.stopGeneration());
+        
+        document.querySelector("#file-upload").addEventListener("click", () => this.fileInput.click());
+        this.chatbotToggler.addEventListener("click", () => this.toggleChatbot());
+        this.closeChatbot.addEventListener("click", () => this.closeChatbotPopup());
+        
+        // Close chatbot on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && document.body.classList.contains("show-chatbot")) {
+                this.closeChatbotPopup();
+            }
+        });
+    }
+    
+    createMessageElement(content, ...classes) {
+        const div = document.createElement("div");
+        div.classList.add("message", ...classes);
+        div.innerHTML = content;
+        
+        // Add timestamp
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const timeEl = document.createElement("span");
+        timeEl.className = "message-timestamp";
+        timeEl.textContent = timestamp;
+        div.appendChild(timeEl);
+        
+        return div;
+    }
+    
+    async generateBotResponse(incomingMessageDiv) {
+        const messageElement = incomingMessageDiv.querySelector(".message-text");
+        this.chatHistory.push({
+            role: "user",
+            parts: [
+                { text: this.userData.message },
+                ...(this.userData.file.data ? [{ inline_data: this.userData.file }] : [])
+            ]
+        });
+        
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: this.chatHistory })
+        };
+        
+        try {
+            this.currentController = new AbortController();
+            const timeoutId = setTimeout(() => this.currentController.abort(), 30000); // 30s timeout
+            
+            // Show stop button
+            this.stopGenerationButton.style.display = "block";
+            this.sendMessageButton.style.display = "none";
+            
+            const response = await fetch(this.API_URL, {
+                ...requestOptions,
+                signal: this.currentController.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || `HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            const apiResponseText = data.candidates[0].content.parts[0].text
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\*(.*?)\*/g, "<em>$1</em>")
+                .trim();
+            
+            // Typewriter effect
+            this.typewriterEffect(messageElement, apiResponseText);
+            
+            this.chatHistory.push({
+                role: "model",
+                parts: [{ text: apiResponseText }]
+            });
+            
+            this.saveChatHistory();
+            
+        } catch (error) {
+            console.error("API Error:", error);
+            
+            let errorMessage = "Sorry, I'm having trouble responding right now.";
+            if (error.name === "AbortError") {
+                errorMessage = "Response generation was stopped.";
+            } else if (error.message.includes("quota")) {
+                errorMessage = "Service temporarily unavailable. Please try again later.";
+            }
+            
+            messageElement.innerHTML = `<span class="error-message">${errorMessage}</span>`;
+            
+        } finally {
+            this.userData.file = { data: null, mime_type: null };
+            incomingMessageDiv.classList.remove("thinking");
+            this.scrollToBottom();
+            
+            // Hide stop button and show send button
+            this.stopGenerationButton.style.display = "none";
+            this.sendMessageButton.style.display = "block";
+            this.currentController = null;
+        }
+    }
+    
+    typewriterEffect(element, text) {
+        element.innerHTML = "";
+        let i = 0;
+        const speed = 30;
+        
+        const typeWriter = () => {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        };
+        typeWriter();
+    }
+    
+    handleOutgoingMessage(e) {
+        e.preventDefault();
+        const message = this.messageInput.value.trim();
+        
+        if (!message && !this.userData.file.data) return;
+        
+        this.userData.message = message;
+        this.messageInput.value = "";
+        this.fileUploadWrapper.classList.remove("file-uploaded");
+        this.adjustTextareaHeight();
+        
+        const messageContent = `
+            <div class="message-text">${this.escapeHtml(message)}</div>
+            ${this.userData.file.data ? 
+                `<img src="data:${this.userData.file.mime_type};base64,${this.userData.file.data}" class="attachment" />` : 
+                ""}`;
+        
+        const outgoingMessageDiv = this.createMessageElement(messageContent, "user-message");
+        this.chatBody.appendChild(outgoingMessageDiv);
+        this.scrollToBottom();
+        
+        // Add bot thinking indicator
+        setTimeout(() => {
+            const botMessageContent = `
+                <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+                    <path d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z" />
+                </svg>
+                <div class="message-text">
+                    <div class="thinking-indicator">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>`;
+            
+            const incomingMessageDiv = this.createMessageElement(botMessageContent, "bot-message", "thinking");
+            this.chatBody.appendChild(incomingMessageDiv);
+            this.scrollToBottom();
+            this.generateBotResponse(incomingMessageDiv);
+        }, 600);
+    }
+    
+    handleKeydown(e) {
+        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 768) {
+            e.preventDefault();
+            this.handleOutgoingMessage(e);
+        }
+    }
+    
+    adjustTextareaHeight() {
+        this.messageInput.style.height = `${this.initialInputHeight}px`;
+        this.messageInput.style.height = `${this.messageInput.scrollHeight}px`;
+        
+        const formElement = document.querySelector(".chat-form");
+        formElement.style.borderRadius = this.messageInput.scrollHeight > this.initialInputHeight ? "15px" : "32px";
+    }
+    
+    handleFileUpload() {
+        const file = this.fileInput.files[0];
+        if (!file) return;
+        
+        if (file.size > 10 * 1024 * 1024) { // 10MB limit
+            alert("File size must be less than 10MB");
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.fileUploadWrapper.querySelector("img").src = e.target.result;
+            this.fileUploadWrapper.classList.add("file-uploaded");
+            const base64String = e.target.result.split(",")[1];
+            this.userData.file = {
+                data: base64String,
+                mime_type: file.type
+            };
+            this.fileInput.value = "";
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    cancelFileUpload() {
+        this.userData.file = { data: null, mime_type: null };
+        this.fileUploadWrapper.classList.remove("file-uploaded");
+    }
+    
+    setupEmojiPicker() {
+        const picker = document.createElement('em-emoji-picker');
+        picker.setAttribute('theme', 'light');
+        picker.setAttribute('skin-tone-position', 'after');
+        picker.setAttribute('preview-position', 'none');
+        
+        picker.addEventListener('emoji-click', (event) => {
+            const { selectionStart: start, selectionEnd: end } = this.messageInput;
+            this.messageInput.setRangeText(event.detail.native, start, end, "end");
+            this.messageInput.focus();
+        });
+        
+        document.querySelector(".chat-form").appendChild(picker);
+        
+        document.querySelector("#emoji-picker").addEventListener("click", (e) => {
+            e.preventDefault();
+            document.body.classList.toggle("show-emoji-picker");
+        });
+        
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest("em-emoji-picker") && !e.target.closest("#emoji-picker")) {
+                document.body.classList.remove("show-emoji-picker");
+            }
+        });
+    }
+    
+    toggleChatbot() {
+        document.body.classList.toggle("show-chatbot");
+        if (document.body.classList.contains("show-chatbot")) {
+            this.messageInput.focus();
+        }
+    }
+    
+    closeChatbotPopup() {
+        document.body.classList.remove("show-chatbot");
+    }
+    
+    scrollToBottom() {
+        this.chatBody.scrollTop = this.chatBody.scrollHeight;
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    saveChatHistory() {
+        localStorage.setItem('chatHistory', JSON.stringify(this.chatHistory));
+    }
+    
+    loadChatHistory() {
+        const saved = localStorage.getItem('chatHistory');
+        if (saved) {
+            this.chatHistory = JSON.parse(saved);
+            // Optionally restore chat messages in UI
+        }
+    }
+
+    stopGeneration() {
+        if (this.currentController) {
+            this.currentController.abort();
+            this.currentController = null;
+        }
+    }
+}
+
+// Initialize chatbot when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new ChatBot();
+});
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+</body>
+</html>
+ 
